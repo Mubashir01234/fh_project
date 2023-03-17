@@ -2,6 +2,9 @@
 FH project - step by step
 
 
+## env file requirement
+rename env.txt to .env and add correct valuew
+
 ---
 
 ## Start a mysql project
