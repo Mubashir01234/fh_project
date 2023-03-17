@@ -1,0 +1,4 @@
+*.log
+project
+.env
+mysql.txt
