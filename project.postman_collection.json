@@ -1,0 +1,270 @@
+{
+	"info": {
+		"_postman_id": "e7678bb9-a186-44a9-95d1-74c1c177fd27",
+		"name": "project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17385921"
+	},
+	"item": [
+		{
+			"name": "add_user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"mubashr\",\n    \"password\": \"mubashir\",\n    \"email\": \"mubashir@gmxxail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/user/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/user/get/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"get",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_user",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/user/delete/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"delete",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": \"1\",\n    \"username\": \"abc\",\n    \"password\": \"abc\",\n    \"email\": \"abc@gamail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/user/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add_role",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"role_name\": \"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/role/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"role",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_role",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/role/get/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"role",
+						"get",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_role",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"role_id\": \"2\",\n    \"role_name\":\"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/role/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"role",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_role",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/role/delete/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"role",
+						"delete",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_role_associate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\":\"1\",\n    \"role_id\": \"3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/user/role/associate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"role",
+						"associate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_role_disaccociate",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\":\"1\",\n    \"role_id\": \"3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/user/role/disassociate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"user",
+						"role",
+						"disassociate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
