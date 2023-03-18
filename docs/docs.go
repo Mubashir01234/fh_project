@@ -23,7 +23,7 @@ const docTemplate = `{
         "/user/add": {
             "post": {
                 summary: Add new user,
-                "tags":[
+                tags:[
                     User
                 ],
                 produces: [
@@ -33,13 +33,12 @@ const docTemplate = `{
                     {
                         name: add user,
                         in: body,   
-                        description: Register new user,
                         "properties":{
-                            username:{
+                            email:{
                                 type:string,
                                 format:json
                             },
-                            email:{
+                            username:{
                                 type:string,
                                 format:json
                             },
@@ -55,8 +54,272 @@ const docTemplate = `{
 						description: Status, OK
 					}
 				}
-            },
-        }
+            }
+        },
+        "/user/get/{id}":{
+            "get":{
+                summary: Get user by ID,
+                tags:[
+                    User
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+					{
+						name: id,
+						in: path,
+						description: give user id,
+						required: true,
+						type: string
+					},
+				],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
+        "/user/update":{
+            "put":{
+                summary: Update user,
+                tags:[
+                    User
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+                    {
+                        name: update user,
+                        in: body,
+                        "properties":{
+                            user_id:{
+                                type:string,
+                                format:json
+                            },
+                            email:{
+                                type:string,
+                                format:json
+                            },
+                            username:{
+                                type:string,
+                                format:json
+                            },
+                            password:{
+                                type:string,
+                                format:json
+                            },
+                        },
+                    }
+			    ],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
+        "/user/delete/{id}":{
+            "delete":{
+                summary: Delete user by ID,
+                tags:[
+                    User
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+					{
+						name: id,
+						in: path,
+						description: give user id,
+						required: true,
+						type: string
+					},
+				],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
+        "/role/add": {
+            "post": {
+                summary: Add new role,
+                tags:[
+                    Role
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+                    {
+                        name: add role,
+                        in: body,   
+                        "properties":{
+                            role_name:{
+                                type:string,
+                                format:json
+                            }
+                        },
+			        },
+			    ],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}
+            }
+        },
+        "/role/get/{id}":{
+            "get":{
+                summary: Get role by ID,
+                tags:[
+                    Role
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+					{
+						name: id,
+						in: path,
+						description: give user id,
+						required: true,
+						type: string
+					},
+				],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
+        "/role/update":{
+            "put":{
+                summary: Update role,
+                tags:[
+                    Role
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+                    {
+                        name: update role,
+                        in: body,
+                        "properties":{
+                            role_id:{
+                                type:string,
+                                format:json
+                            },
+                            role_name:{
+                                type:string,
+                                format:json
+                            }
+                        },
+                    }
+			    ],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
+        "/role/delete/{id}":{
+            "delete":{
+                summary: Delete role by ID,
+                tags:[
+                    Role
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+					{
+						name: id,
+						in: path,
+						description: give role id,
+						required: true,
+						type: string
+					},
+				],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
+        "/user/role/associate": {
+            "post": {
+                summary: User to role associate,
+                tags:[
+                    Role associate
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+                    {
+                        name: associate role,
+                        in: body,   
+                        "properties":{
+                            user_id:{
+                                type:string,
+                                format:json
+                            },
+                            role_id:{
+                                type:string,
+                                format:json
+                            }
+                        },
+			        },
+			    ],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}
+            }
+        },
+        "/user/role/disassociate":{
+            "delete":{
+                summary: User to role disassociate,
+                tags:[
+                    Role associate
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+                    {
+                        name: disassociate role,
+                        in: body,   
+                        "properties":{
+                            user_id:{
+                                type:string,
+                                format:json
+                            },
+                            role_id:{
+                                type:string,
+                                format:json
+                            }
+                        },
+			        },
+			    ],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
     }
 }`
 

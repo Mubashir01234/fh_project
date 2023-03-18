@@ -14,7 +14,7 @@ docker run --name some-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=`password` -d m
 docker exec -it some-mysql bash
 
 ---
-## Swagger
+## Swagger UI
 For swagger run the project and browse to:
 ```
 http://localhost:<server-port>/swagger/index.html
