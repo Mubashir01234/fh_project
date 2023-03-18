@@ -3,7 +3,10 @@ package routes
 import (
 	"project/controller"
 
+	_ "project/docs"
+
 	"github.com/gorilla/mux"
+	httpSwagger "github.com/swaggo/http-swagger"
 )
 
 func Routes() *mux.Router {
@@ -28,6 +31,8 @@ func Routes() *mux.Router {
 	userRole := user.PathPrefix("/role").Subrouter()
 	userRole.HandleFunc("/associate", controller.AssociateUserRoleAPI).Methods("POST")
 	userRole.HandleFunc("/disassociate", controller.DisassociateUserRoleAPI).Methods("DELETE")
+
+	router.PathPrefix("/swagger/").Handler(httpSwagger.WrapHandler)
 
 	return router
 }
