@@ -15,4 +15,7 @@ docker exec -it some-mysql bash
 
 ---
 ## Swagger
-For swagger run the project and browse to http://localhost:< server-port >/swagger/index.html
+For swagger run the project and browse to:
+```
+http://localhost:<server-port>/swagger/index.html
+```
