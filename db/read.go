@@ -46,3 +46,30 @@ func (db *Connection) GetAssociateUserByUserIDDB(roleID, userID string) (string,
 	}
 	return roleID, nil
 }
+
+func (db *Connection) GetAllUsersDB() ([]model.User, error) {
+	var resp []model.User
+	err := db.conn.Select(&resp, `SELECT * FROM project.users`)
+	if err != nil {
+		return resp, err
+	}
+	return resp, nil
+}
+
+func (db *Connection) GetAllRolesDB() ([]model.Role, error) {
+	var resp []model.Role
+	err := db.conn.Select(&resp, `SELECT * FROM project.roles`)
+	if err != nil {
+		return resp, err
+	}
+	return resp, nil
+}
+
+func (db *Connection) GetAllUsersRolesDB() ([]model.RoleAssociate, error) {
+	var resp []model.RoleAssociate
+	err := db.conn.Select(&resp, `SELECT * FROM project.user_roles`)
+	if err != nil {
+		return resp, err
+	}
+	return resp, nil
+}

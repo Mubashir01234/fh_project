@@ -122,3 +122,18 @@ var UpdateUserAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Reques
 	}
 	model.SuccessRespond(resp, rw)
 })
+
+var GetAllUsersAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
+	resp, err := conn.GetAllUsersDB()
+	if err != nil && err != sql.ErrNoRows {
+		log.Printf("database error: %v\n", err.Error())
+		model.ServerErrResponse(err.Error(), rw)
+		return
+	}
+	if len(resp) <= 0 {
+		log.Printf("error: %v\n", "users doesn't exists")
+		model.SuccessRespond("users doesn't exists", rw)
+		return
+	}
+	model.SuccessRespond(resp, rw)
+})

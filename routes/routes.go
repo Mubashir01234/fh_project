@@ -19,6 +19,7 @@ func Routes() *mux.Router {
 	user.HandleFunc("/get/{id}", controller.GetUserAPI).Methods("GET")
 	user.HandleFunc("/delete/{id}", controller.DeleteUserAPI).Methods("DELETE")
 	user.HandleFunc("/update", controller.UpdateUserAPI).Methods("PUT")
+	user.HandleFunc("/", controller.GetAllUsersAPI).Methods("GET")
 
 	// roles endpoints
 	role := router.PathPrefix("/role").Subrouter()
@@ -26,11 +27,13 @@ func Routes() *mux.Router {
 	role.HandleFunc("/get/{id}", controller.GetRoleAPI).Methods("GET")
 	role.HandleFunc("/update", controller.UpdateRoleAPI).Methods("PUT")
 	role.HandleFunc("/delete/{id}", controller.DeleteRoleAPI).Methods("DELETE")
+	role.HandleFunc("/", controller.GetAllRolesAPI).Methods("GET")
 
 	// user role endpoints
 	userRole := user.PathPrefix("/role").Subrouter()
 	userRole.HandleFunc("/associate", controller.AssociateUserRoleAPI).Methods("POST")
 	userRole.HandleFunc("/disassociate", controller.DisassociateUserRoleAPI).Methods("DELETE")
+	userRole.HandleFunc("/", controller.GetAllUsersRolesAPI).Methods("GET")
 
 	router.PathPrefix("/swagger/").Handler(httpSwagger.WrapHandler)
 

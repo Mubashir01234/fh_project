@@ -81,6 +81,22 @@ const docTemplate = `{
 				}                
             }
         },
+        "/user/":{
+            "get":{
+                summary: Get all users,
+                tags:[
+                    User
+                ],
+                produces: [
+					application/json
+				],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
         "/user/update":{
             "put":{
                 summary: Update user,
@@ -199,6 +215,22 @@ const docTemplate = `{
 				}                
             }
         },
+        "/role/":{
+            "get":{
+                summary: Get all roles,
+                tags:[
+                    Role
+                ],
+                produces: [
+					application/json
+				],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
         "/role/update":{
             "put":{
                 summary: Update role,
@@ -286,6 +318,22 @@ const docTemplate = `{
 						description: Status, OK
 					}
 				}
+            }
+        },
+        "/user/role/":{
+            "get":{
+                summary: Get all users roles,
+                tags:[
+                    Role associate
+                ],
+                produces: [
+					application/json
+				],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
             }
         },
         "/user/role/disassociate":{

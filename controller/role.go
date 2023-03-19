@@ -176,3 +176,33 @@ var DisassociateUserRoleAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *h
 	}
 	model.SuccessRespond("disaccociate role successfully", rw)
 })
+
+var GetAllRolesAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
+	resp, err := conn.GetAllRolesDB()
+	if err != nil && err != sql.ErrNoRows {
+		log.Printf("database error: %v\n", err.Error())
+		model.ServerErrResponse(err.Error(), rw)
+		return
+	}
+	if len(resp) <= 0 {
+		log.Printf("error: %v\n", "roles doesn't exists")
+		model.SuccessRespond("roles doesn't exists", rw)
+		return
+	}
+	model.SuccessRespond(resp, rw)
+})
+
+var GetAllUsersRolesAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
+	resp, err := conn.GetAllUsersRolesDB()
+	if err != nil && err != sql.ErrNoRows {
+		log.Printf("database error: %v\n", err.Error())
+		model.ServerErrResponse(err.Error(), rw)
+		return
+	}
+	if len(resp) <= 0 {
+		log.Printf("error: %v\n", "users roles doesn't exists")
+		model.SuccessRespond("users roles doesn't exists", rw)
+		return
+	}
+	model.SuccessRespond(resp, rw)
+})
