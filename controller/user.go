@@ -67,13 +67,7 @@ var GetUserAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) 
 
 var DeleteUserAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 	ID := mux.Vars(r)["id"]
-	err := conn.DeleteUserRoles(ID)
-	if err != nil && err != sql.ErrNoRows {
-		log.Printf("database error: %v\n", err.Error())
-		model.ServerErrResponse(err.Error(), rw)
-		return
-	}
-	err = conn.DeleteUserByIDDB(ID)
+	err := conn.DeleteUserByIDDB(ID)
 	if err != nil && err != sql.ErrNoRows {
 		log.Printf("database error: %v\n", err.Error())
 		model.ServerErrResponse(err.Error(), rw)
