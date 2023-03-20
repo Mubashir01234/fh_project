@@ -73,3 +73,21 @@ func (db *Connection) GetAllUsersRolesDB() ([]model.RoleAssociate, error) {
 	}
 	return resp, nil
 }
+
+func (db *Connection) GetProjectByIDDB(ID string) (model.Project, error) {
+	var resp model.Project
+	err := db.conn.Get(&resp, `SELECT * FROM project.projects WHERE project_id=?`, ID)
+	if err != nil {
+		return resp, err
+	}
+	return resp, nil
+}
+
+func (db *Connection) GetAllProjectDB() ([]model.Project, error) {
+	var resp []model.Project
+	err := db.conn.Select(&resp, `SELECT * FROM project.projects`)
+	if err != nil {
+		return resp, err
+	}
+	return resp, nil
+}

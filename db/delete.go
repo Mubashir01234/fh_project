@@ -23,3 +23,11 @@ func (db *Connection) DisassociateUserRoleDB(roleID, userID string) error {
 	}
 	return nil
 }
+
+func (db *Connection) DeleteProjectByIDDB(ID string) error {
+	_, err := db.conn.Exec(`DELETE FROM project.projects WHERE project_id=?`, ID)
+	if err != nil {
+		return err
+	}
+	return nil
+}

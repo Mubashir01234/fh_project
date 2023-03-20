@@ -31,3 +31,13 @@ func (db *Connection) AssociateUserRoleDB(role model.RoleAssociate) (model.RoleA
 	}
 	return role, nil
 }
+
+func (db *Connection) AddProjectDB(project model.Project) (model.Project, error) {
+	var resp model.Project
+	_, err := db.conn.NamedQuery(`INSERT INTO project.projects(project_name,project_description,start_date,end_date,budget)
+	VALUES(:project_name,:project_description,:start_date,:end_date,:budget)`, project)
+	if err != nil {
+		return resp, err
+	}
+	return project, nil
+}

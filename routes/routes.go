@@ -35,6 +35,14 @@ func Routes() *mux.Router {
 	userRole.HandleFunc("/disassociate", controller.DisassociateUserRoleAPI).Methods("DELETE")
 	userRole.HandleFunc("/", controller.GetAllUsersRolesAPI).Methods("GET")
 
+	// project endpoints
+	project := router.PathPrefix("/project").Subrouter()
+	project.HandleFunc("/add", controller.AddProjectAPI).Methods("POST")
+	project.HandleFunc("/get/{id}", controller.GetProjectAPI).Methods("GET")
+	project.HandleFunc("/", controller.GetAllProjectAPI).Methods("GET")
+	project.HandleFunc("/update", controller.UpdateProjectAPI).Methods("PUT")
+	project.HandleFunc("/delete/{id}", controller.DeleteProjectAPI).Methods("DELETE")
+
 	router.PathPrefix("/swagger/").Handler(httpSwagger.WrapHandler)
 
 	return router

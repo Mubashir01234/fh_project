@@ -368,6 +368,164 @@ const docTemplate = `{
 				}                
             }
         },
+        "/project/add": {
+            "post": {
+                summary: Add new project,
+                tags:[
+                    Project
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+                    {
+                        name: add project,
+                        in: body,   
+                        "properties":{
+                            project_name:{
+                                type:string,
+                                format:json
+                            },
+                            project_description:{
+                                type:string,
+                                format:json
+                            },
+                            start_date:{
+                                type:int64,
+                                format:json
+                            },
+                            end_date:{
+                                type:int64,
+                                format:json
+                            },
+                            budget:{
+                                type:string,
+                                format:json
+                            }
+                        },
+			        },
+			    ],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}
+            }
+        },
+        "/project/get/{id}":{
+            "get":{
+                summary: Get project by ID,
+                tags:[
+                    Project
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+					{
+						name: id,
+						in: path,
+						description: give project id,
+						required: true,
+						type: string
+					},
+				],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
+        "/project/":{
+            "get":{
+                summary: Get all projects,
+                tags:[
+                    Project
+                ],
+                produces: [
+					application/json
+				],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
+        "/project/update":{
+            "put":{
+                summary: Update project,
+                tags:[
+                    Project
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+                    {
+                        name: update project,
+                        in: body,
+                        "properties":{
+                            project_id:{
+                                type:string,
+                                format:json
+                            },
+                            project_name:{
+                                type:string,
+                                format:json
+                            },
+                            project_description:{
+                                type:string,
+                                format:json
+                            },
+                            start_date:{
+                                type:int64,
+                                format:json
+                            },
+                            end_date:{
+                                type:int64,
+                                format:json
+                            },
+                            budget:{
+                                type:string,
+                                format:json
+                            }
+                        },
+                    }
+			    ],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
+        "/project/delete/{id}":{
+            "delete":{
+                summary: Delete project by ID,
+                tags:[
+                    Project
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+					{
+						name: id,
+						in: path,
+						description: give project id,
+						required: true,
+						type: string
+					},
+				],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
     }
 }`
 

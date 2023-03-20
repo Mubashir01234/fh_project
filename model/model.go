@@ -24,3 +24,12 @@ type RoleDisassociate struct {
 	UserID string `json:"user_id,omitempty" db:"user_id"`
 	RoleID string `json:"role_id,omitempty" db:"role_id"`
 }
+
+type Project struct {
+	ID                 string `json:"project_id,omitempty" db:"project_id"`
+	ProjectName        string `json:"project_name,omitempty" db:"project_name"`
+	ProjectDescription string `json:"project_description,omitempty" db:"project_description"`
+	StartDate          int64  `json:"start_date,omitempty" db:"start_date"`
+	EndDate            int64  `json:"end_date,omitempty" db:"end_date"`
+	Budget             string `json:"budget,omitempty" db:"budget"`
+}
