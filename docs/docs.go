@@ -818,6 +818,88 @@ const docTemplate = `{
 				}                
             }
         },
+        "/project/task/add": {
+            "post": {
+                summary: Assign task to project,
+                tags:[
+                    Project Task
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+                    {
+                        name: assign task to project,
+                        in: body,   
+                        "properties":{
+                            project_id:{
+                                type:string,
+                                format:json
+                            },
+                            task_id:{
+                                type:string,
+                                format:json
+                            }
+                        },
+			        },
+			    ],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}
+            }
+        },
+        "/project/task/get/{id}":{
+            "get":{
+                summary: Get project tasks by project ID,
+                tags:[
+                    Project Task
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+					{
+						name: id,
+						in: path,
+						description: give project_id,
+						required: true,
+						type: string
+					},
+				],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
+        "/project/task/delete/{id}":{
+            "delete":{
+                summary: Deassign task from project by task ID and Project ID",
+                tags:[
+                    Project Task
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+					{
+						name: id,
+						in: path,
+						description: give project task id,
+						required: true,
+						type: string
+					},
+				],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
     }
 }`
 

@@ -47,3 +47,11 @@ func (db *Connection) DeleteTeamByIDDB(ID string) error {
 	}
 	return nil
 }
+
+func (db *Connection) DeassignTaskFromProjectDB(projectID string) error {
+	_, err := db.conn.Exec(`DELETE FROM project.project_tasks WHERE project_task_id=?`, projectID)
+	if err != nil {
+		return err
+	}
+	return nil
+}

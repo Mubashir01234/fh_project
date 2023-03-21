@@ -48,3 +48,9 @@ type Team struct {
 	TeamName        string `json:"team_name,omitempty" db:"team_name"`
 	TeamDescription string `json:"team_description,omitempty" db:"team_description"`
 }
+
+type ProjectTask struct {
+	ID        string `json:"project_task_id,omitempty" db:"project_task_id"`
+	ProjectID string `json:"project_id,omitempty" db:"project_id"`
+	TaskID    string `json:"task_id,omitempty" db:"task_id"`
+}

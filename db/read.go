@@ -127,3 +127,12 @@ func (db *Connection) GetAllTeamDB() ([]model.Team, error) {
 	}
 	return resp, nil
 }
+
+func (db *Connection) GetProjectTasksDB(ID string) ([]model.ProjectTask, error) {
+	var resp []model.ProjectTask
+	err := db.conn.Select(&resp, `SELECT * FROM project.project_tasks WHERE project_id=?`, ID)
+	if err != nil {
+		return resp, err
+	}
+	return resp, nil
+}
