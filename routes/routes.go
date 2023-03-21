@@ -51,6 +51,14 @@ func Routes() *mux.Router {
 	task.HandleFunc("/update", controller.UpdateTaskAPI).Methods("PUT")
 	task.HandleFunc("/delete/{id}", controller.DeleteTaskAPI).Methods("DELETE")
 
+	// team endpoints
+	team := router.PathPrefix("/team").Subrouter()
+	team.HandleFunc("/add", controller.AddTeamAPI).Methods("POST")
+	team.HandleFunc("/get/{id}", controller.GetTeamAPI).Methods("GET")
+	team.HandleFunc("/", controller.GetAllTeamAPI).Methods("GET")
+	team.HandleFunc("/update", controller.UpdateTeamAPI).Methods("PUT")
+	team.HandleFunc("/delete/{id}", controller.DeleteTeamAPI).Methods("DELETE")
+
 	router.PathPrefix("/swagger/").Handler(httpSwagger.WrapHandler)
 
 	return router

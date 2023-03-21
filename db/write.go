@@ -51,3 +51,13 @@ func (db *Connection) AddTaskDB(task model.Task) (model.Task, error) {
 	}
 	return task, nil
 }
+
+func (db *Connection) AddTeamDB(team model.Team) (model.Team, error) {
+	var resp model.Team
+	_, err := db.conn.NamedQuery(`INSERT INTO project.teams(team_name,team_description)
+	VALUES(:team_name,:team_description)`, team)
+	if err != nil {
+		return resp, err
+	}
+	return team, nil
+}

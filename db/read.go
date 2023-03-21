@@ -109,3 +109,21 @@ func (db *Connection) GetAllTaskDB() ([]model.Task, error) {
 	}
 	return resp, nil
 }
+
+func (db *Connection) GetTeamByIDDB(ID string) (model.Team, error) {
+	var resp model.Team
+	err := db.conn.Get(&resp, `SELECT * FROM project.teams WHERE team_id=?`, ID)
+	if err != nil {
+		return resp, err
+	}
+	return resp, nil
+}
+
+func (db *Connection) GetAllTeamDB() ([]model.Team, error) {
+	var resp []model.Team
+	err := db.conn.Select(&resp, `SELECT * FROM project.teams`)
+	if err != nil {
+		return resp, err
+	}
+	return resp, nil
+}

@@ -57,3 +57,17 @@ func (db *Connection) UpdateTaskDB(user model.Task) (model.Task, error) {
 	}
 	return resp, nil
 }
+
+func (db *Connection) UpdateTeamDB(user model.Team) (model.Team, error) {
+	var resp model.Team
+	_, err := db.conn.NamedQuery(`UPDATE project.teams SET team_name=:team_name,team_description=:team_description
+	WHERE team_id=:team_id`, user)
+	if err != nil {
+		return resp, err
+	}
+	err = db.conn.Get(&resp, `SELECT * FROM project.teams WHERE team_id=?`, user.ID)
+	if err != nil {
+		return resp, err
+	}
+	return resp, nil
+}

@@ -42,3 +42,9 @@ type Task struct {
 	EndDate         int64  `json:"end_date,omitempty" db:"end_date"`
 	Status          string `json:"status,omitempty" db:"status"`
 }
+
+type Team struct {
+	ID              string `json:"team_id,omitempty" db:"team_id"`
+	TeamName        string `json:"team_name,omitempty" db:"team_name"`
+	TeamDescription string `json:"team_description,omitempty" db:"team_description"`
+}

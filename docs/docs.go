@@ -684,6 +684,140 @@ const docTemplate = `{
 				}                
             }
         },
+        "/team/add": {
+            "post": {
+                summary: Add new team,
+                tags:[
+                    Team
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+                    {
+                        name: add team,
+                        in: body,   
+                        "properties":{
+                            team_name:{
+                                type:string,
+                                format:json
+                            },
+                            team_description:{
+                                type:string,
+                                format:json
+                            }
+                        },
+			        },
+			    ],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}
+            }
+        },
+        "/team/get/{id}":{
+            "get":{
+                summary: Get team by ID,
+                tags:[
+                    Team
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+					{
+						name: id,
+						in: path,
+						description: give team id,
+						required: true,
+						type: string
+					},
+				],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
+        "/team/":{
+            "get":{
+                summary: Get all teams,
+                tags:[
+                    Team
+                ],
+                produces: [
+					application/json
+				],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
+        "/team/update":{
+            "put":{
+                summary: Update team,
+                tags:[
+                    Team
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+                    {
+                        name: update team,
+                        in: body,
+                        "properties":{
+                            team_id:{
+                                type:string,
+                                format:json
+                            },
+                            team_name:{
+                                type:string,
+                                format:json
+                            },
+                            team_description:{
+                                type:string,
+                                format:json
+                            }
+                        },
+                    }
+			    ],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
+        "/team/delete/{id}":{
+            "delete":{
+                summary: Delete team by ID,
+                tags:[
+                    Team
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+					{
+						name: id,
+						in: path,
+						description: give team id,
+						required: true,
+						type: string
+					},
+				],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
     }
 }`
 
