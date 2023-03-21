@@ -91,3 +91,21 @@ func (db *Connection) GetAllProjectDB() ([]model.Project, error) {
 	}
 	return resp, nil
 }
+
+func (db *Connection) GetTaskByIDDB(ID string) (model.Task, error) {
+	var resp model.Task
+	err := db.conn.Get(&resp, `SELECT * FROM project.tasks WHERE task_id=?`, ID)
+	if err != nil {
+		return resp, err
+	}
+	return resp, nil
+}
+
+func (db *Connection) GetAllTaskDB() ([]model.Task, error) {
+	var resp []model.Task
+	err := db.conn.Select(&resp, `SELECT * FROM project.tasks`)
+	if err != nil {
+		return resp, err
+	}
+	return resp, nil
+}

@@ -31,3 +31,11 @@ func (db *Connection) DeleteProjectByIDDB(ID string) error {
 	}
 	return nil
 }
+
+func (db *Connection) DeleteTaskByIDDB(ID string) error {
+	_, err := db.conn.Exec(`DELETE FROM project.tasks WHERE task_id=?`, ID)
+	if err != nil {
+		return err
+	}
+	return nil
+}

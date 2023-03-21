@@ -33,3 +33,12 @@ type Project struct {
 	EndDate            int64  `json:"end_date,omitempty" db:"end_date"`
 	Budget             string `json:"budget,omitempty" db:"budget"`
 }
+
+type Task struct {
+	ID              string `json:"task_id,omitempty" db:"task_id"`
+	TaskName        string `json:"task_name,omitempty" db:"task_name"`
+	TaskDescription string `json:"task_description,omitempty" db:"task_description"`
+	StartDate       int64  `json:"start_date,omitempty" db:"start_date"`
+	EndDate         int64  `json:"end_date,omitempty" db:"end_date"`
+	Status          string `json:"status,omitempty" db:"status"`
+}
