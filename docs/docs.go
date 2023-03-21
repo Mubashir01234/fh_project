@@ -877,9 +877,91 @@ const docTemplate = `{
         },
         "/project/task/delete/{id}":{
             "delete":{
-                summary: Deassign task from project by task ID and Project ID",
+                summary: Deassign task from project by project task id,
                 tags:[
                     Project Task
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+					{
+						name: id,
+						in: path,
+						description: give project task id,
+						required: true,
+						type: string
+					},
+				],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
+        "/team/user/add": {
+            "post": {
+                summary: Assign user to team,
+                tags:[
+                    User Team
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+                    {
+                        name: assign user to team,
+                        in: body,   
+                        "properties":{
+                            team_id:{
+                                type:string,
+                                format:json
+                            },
+                            user_id:{
+                                type:string,
+                                format:json
+                            }
+                        },
+			        },
+			    ],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}
+            }
+        },
+        "/team/user/get/{id}":{
+            "get":{
+                summary: Get team user by team ID,
+                tags:[
+                    User Team
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+					{
+						name: id,
+						in: path,
+						description: give team_id,
+						required: true,
+						type: string
+					},
+				],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
+        "/team/user/delete/{id}":{
+            "delete":{
+                summary: Deassign user from team by user team id",
+                tags:[
+                    User Team
                 ],
                 produces: [
 					application/json

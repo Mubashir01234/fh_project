@@ -10,37 +10,37 @@ import (
 	"github.com/gorilla/mux"
 )
 
-var AssignTaskToProjectAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
-	var body model.ProjectTask
+var AssignUserToTeamAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
+	var body model.UserTeam
 	err := json.NewDecoder(r.Body).Decode(&body)
 	if err != nil {
 		log.Printf("decode error: %v\n", err.Error())
 		model.ServerErrResponse(err.Error(), rw)
 		return
 	}
-	taskResp, err := conn.GetTaskByIDDB(body.TaskID)
+	userResp, err := conn.GetUserByIDDB(body.UserID)
 	if err != nil && err != sql.ErrNoRows {
 		log.Printf("database error: %v\n", err.Error())
 		model.ServerErrResponse(err.Error(), rw)
 		return
 	}
-	if len(taskResp.ID) <= 0 {
-		log.Printf("error: %v\n", "task doesn't exists")
-		model.ErrorResponse("task doesn't exist", rw)
+	if len(userResp.ID) <= 0 {
+		log.Printf("error: %v\n", "user doesn't exist")
+		model.ErrorResponse("user doesn't exist", rw)
 		return
 	}
-	projectResp, err := conn.GetProjectByIDDB(body.ProjectID)
+	teamResp, err := conn.GetTeamByIDDB(body.TeamID)
 	if err != nil && err != sql.ErrNoRows {
 		log.Printf("database error: %v\n", err.Error())
 		model.ServerErrResponse(err.Error(), rw)
 		return
 	}
-	if len(projectResp.ID) <= 0 {
-		log.Printf("error: %v\n", "project doesn't exist")
-		model.ServerErrResponse("project doesn't exist", rw)
+	if len(teamResp.ID) <= 0 {
+		log.Printf("error: %v\n", "team doesn't exists")
+		model.ServerErrResponse("team doesn't exists", rw)
 		return
 	}
-	resp, err := conn.AddProjectTaskDB(body)
+	resp, err := conn.AddUserToTeamDB(body)
 	if err != nil {
 		log.Printf("database error: %v\n", err.Error())
 		model.ServerErrResponse(err.Error(), rw)
@@ -49,25 +49,25 @@ var AssignTaskToProjectAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *ht
 	model.SuccessRespond(resp, rw)
 })
 
-var GetProjectTasksAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
-	projectID := mux.Vars(r)["id"]
-	resp, err := conn.GetProjectTasksDB(projectID)
+var GetUserTeamsAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
+	teamID := mux.Vars(r)["id"]
+	resp, err := conn.GetTeamUsersDB(teamID)
 	if err != nil && err != sql.ErrNoRows {
 		log.Printf("database error: %v\n", err.Error())
 		model.ServerErrResponse(err.Error(), rw)
 		return
 	}
 	if len(resp) <= 0 {
-		log.Printf("error: %v\n", "project tasks doesn't exists")
-		model.SuccessRespond("project tasks doesn't exists", rw)
+		log.Printf("error: %v\n", "team users doesn't exist")
+		model.SuccessRespond("team users doesn't exist", rw)
 		return
 	}
 	model.SuccessRespond(resp, rw)
 })
 
-var DeassignTaskFromProjectAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
-	projectTaskID := mux.Vars(r)["id"]
-	err := conn.DeassignTaskFromProjectDB(projectTaskID)
+var DeassignUserFromTeamAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
+	userTeamID := mux.Vars(r)["id"]
+	err := conn.DeassignUserFromTeamDB(userTeamID)
 	if err != nil && err != sql.ErrNoRows {
 		log.Printf("database error: %v\n", err.Error())
 		model.ServerErrResponse(err.Error(), rw)

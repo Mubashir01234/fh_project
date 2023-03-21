@@ -71,3 +71,13 @@ func (db *Connection) AddProjectTaskDB(project model.ProjectTask) (model.Project
 	}
 	return project, nil
 }
+
+func (db *Connection) AddUserToTeamDB(user model.UserTeam) (model.UserTeam, error) {
+	var resp model.UserTeam
+	_, err := db.conn.NamedQuery(`INSERT INTO project.user_teams(team_id,user_id)
+	VALUES(:team_id,:user_id)`, user)
+	if err != nil {
+		return resp, err
+	}
+	return user, nil
+}
