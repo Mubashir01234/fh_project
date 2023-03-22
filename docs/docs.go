@@ -959,7 +959,7 @@ const docTemplate = `{
         },
         "/team/user/delete/{id}":{
             "delete":{
-                summary: Deassign user from team by user_teams_id",
+                summary: Deassign user from team by user_teams_id,
                 tags:[
                     User Team
                 ],
