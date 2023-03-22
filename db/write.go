@@ -81,3 +81,13 @@ func (db *Connection) AddUserToTeamDB(user model.UserTeam) (model.UserTeam, erro
 	}
 	return user, nil
 }
+
+func (db *Connection) AddTeamToProjectDB(data model.TeamProject) (model.TeamProject, error) {
+	var resp model.TeamProject
+	_, err := db.conn.NamedQuery(`INSERT INTO project.team_projects(team_id,project_id)
+	VALUES(:team_id,:project_id)`, data)
+	if err != nil {
+		return resp, err
+	}
+	return data, nil
+}

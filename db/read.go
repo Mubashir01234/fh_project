@@ -145,3 +145,39 @@ func (db *Connection) GetTeamUsersDB(ID string) ([]model.UserTeam, error) {
 	}
 	return resp, nil
 }
+
+func (db *Connection) GetTeamProjectsDB(ID string) ([]model.TeamProject, error) {
+	var resp []model.TeamProject
+	err := db.conn.Select(&resp, `SELECT * FROM project.team_projects WHERE team_id=?`, ID)
+	if err != nil {
+		return resp, err
+	}
+	return resp, nil
+}
+
+func (db *Connection) GetAssignTeamToProjectDB(teamID, projectID string) (string, error) {
+	var ID string
+	err := db.conn.Get(&ID, `SELECT team_id FROM project.team_projects WHERE team_id= ? AND project_id= ?`, teamID, projectID)
+	if err != nil {
+		return "", err
+	}
+	return ID, nil
+}
+
+func (db *Connection) GetAssignTaskToProjectDB(projectID, taskID string) (string, error) {
+	var ID string
+	err := db.conn.Get(&ID, `SELECT project_id FROM project.project_tasks WHERE project_id= ? AND task_id= ?`, projectID, taskID)
+	if err != nil {
+		return "", err
+	}
+	return ID, nil
+}
+
+func (db *Connection) GetAssignUserToTeamDB(teamID, userID string) (string, error) {
+	var ID string
+	err := db.conn.Get(&ID, `SELECT team_id FROM project.user_teams WHERE team_id= ? AND user_id= ?`, teamID, userID)
+	if err != nil {
+		return "", err
+	}
+	return ID, nil
+}

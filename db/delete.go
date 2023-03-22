@@ -63,3 +63,11 @@ func (db *Connection) DeassignUserFromTeamDB(ID string) error {
 	}
 	return nil
 }
+
+func (db *Connection) DeassignTeamFromProjectDB(ID string) error {
+	_, err := db.conn.Exec(`DELETE FROM project.team_projects WHERE team_projects_id=?`, ID)
+	if err != nil {
+		return err
+	}
+	return nil
+}

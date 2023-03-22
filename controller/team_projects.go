@@ -10,23 +10,23 @@ import (
 	"github.com/gorilla/mux"
 )
 
-var AssignUserToTeamAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
-	var body model.UserTeam
+var AssignTeamToProjectAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
+	var body model.TeamProject
 	err := json.NewDecoder(r.Body).Decode(&body)
 	if err != nil {
 		log.Printf("decode error: %v\n", err.Error())
 		model.ServerErrResponse(err.Error(), rw)
 		return
 	}
-	userResp, err := conn.GetUserByIDDB(body.UserID)
+	projectResp, err := conn.GetProjectByIDDB(body.ProjectID)
 	if err != nil && err != sql.ErrNoRows {
 		log.Printf("database error: %v\n", err.Error())
 		model.ServerErrResponse(err.Error(), rw)
 		return
 	}
-	if len(userResp.ID) <= 0 {
-		log.Printf("error: %v\n", "user doesn't exist")
-		model.ErrorResponse("user doesn't exist", rw)
+	if len(projectResp.ID) <= 0 {
+		log.Printf("error: %v\n", "project doesn't exist")
+		model.ErrorResponse("project doesn't exist", rw)
 		return
 	}
 	teamResp, err := conn.GetTeamByIDDB(body.TeamID)
@@ -36,22 +36,22 @@ var AssignUserToTeamAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *http.
 		return
 	}
 	if len(teamResp.ID) <= 0 {
-		log.Printf("error: %v\n", "team doesn't exists")
-		model.ServerErrResponse("team doesn't exists", rw)
+		log.Printf("error: %v\n", "team doesn't exist")
+		model.ServerErrResponse("team doesn't exist", rw)
 		return
 	}
-	existedTeamID, err := conn.GetAssignUserToTeamDB(body.TeamID, body.UserID)
+	existedTeamID, err := conn.GetAssignTeamToProjectDB(body.TeamID, body.ProjectID)
 	if err != nil && err != sql.ErrNoRows {
 		log.Printf("database error: %v\n", err.Error())
 		model.ServerErrResponse(err.Error(), rw)
 		return
 	}
 	if existedTeamID == body.TeamID {
-		log.Printf("error: %v\n", "user already assign to this team")
-		model.ErrorResponse("user already assign to this team", rw)
+		log.Printf("error: %v\n", "team already assign to this project")
+		model.ErrorResponse("team already assign to this project", rw)
 		return
 	}
-	resp, err := conn.AddUserToTeamDB(body)
+	resp, err := conn.AddTeamToProjectDB(body)
 	if err != nil {
 		log.Printf("database error: %v\n", err.Error())
 		model.ServerErrResponse(err.Error(), rw)
@@ -60,29 +60,29 @@ var AssignUserToTeamAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *http.
 	model.SuccessRespond(resp, rw)
 })
 
-var GetUserTeamsAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
+var GetTeamProjectsAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
 	teamID := mux.Vars(r)["id"]
-	resp, err := conn.GetTeamUsersDB(teamID)
+	resp, err := conn.GetTeamProjectsDB(teamID)
 	if err != nil && err != sql.ErrNoRows {
 		log.Printf("database error: %v\n", err.Error())
 		model.ServerErrResponse(err.Error(), rw)
 		return
 	}
 	if len(resp) <= 0 {
-		log.Printf("error: %v\n", "team users doesn't exist")
-		model.SuccessRespond("team users doesn't exist", rw)
+		log.Printf("error: %v\n", "team projects doesn't exist")
+		model.SuccessRespond("team projects doesn't exist", rw)
 		return
 	}
 	model.SuccessRespond(resp, rw)
 })
 
-var DeassignUserFromTeamAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
-	userTeamID := mux.Vars(r)["id"]
-	err := conn.DeassignUserFromTeamDB(userTeamID)
+var DeassignTeamFromProjectAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *http.Request) {
+	projectTeamID := mux.Vars(r)["id"]
+	err := conn.DeassignTeamFromProjectDB(projectTeamID)
 	if err != nil && err != sql.ErrNoRows {
 		log.Printf("database error: %v\n", err.Error())
 		model.ServerErrResponse(err.Error(), rw)
 		return
 	}
-	model.SuccessRespond("deassign user from team successfully", rw)
+	model.SuccessRespond("deassign team from project successfully", rw)
 })

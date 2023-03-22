@@ -959,7 +959,7 @@ const docTemplate = `{
         },
         "/team/user/delete/{id}":{
             "delete":{
-                summary: Deassign user from team by user team id",
+                summary: Deassign user from team by user_teams_id",
                 tags:[
                     User Team
                 ],
@@ -970,7 +970,89 @@ const docTemplate = `{
 					{
 						name: id,
 						in: path,
-						description: give project task id,
+						description: give user_teams_id,
+						required: true,
+						type: string
+					},
+				],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
+        "/project/team/add": {
+            "post": {
+                summary: Assign team to project,
+                tags:[
+                    Team Project
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+                    {
+                        name: assign team to project,
+                        in: body,   
+                        "properties":{
+                            team_id:{
+                                type:string,
+                                format:json
+                            },
+                            project_id:{
+                                type:string,
+                                format:json
+                            }
+                        },
+			        },
+			    ],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}
+            }
+        },
+        "/project/team/get/{id}":{
+            "get":{
+                summary: Get projects by team ID,
+                tags:[
+                    Team Project
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+					{
+						name: id,
+						in: path,
+						description: give team_id,
+						required: true,
+						type: string
+					},
+				],
+                responses: {
+					200: {
+						description: Status, OK
+					}
+				}                
+            }
+        },
+        "/project/team/delete/{id}":{
+            "delete":{
+                summary: Deassign team from project by team_projects_id",
+                tags:[
+                    Team Project
+                ],
+                produces: [
+					application/json
+				],
+                parameters: [
+					{
+						name: id,
+						in: path,
+						description: give team_projects_id,
 						required: true,
 						type: string
 					},

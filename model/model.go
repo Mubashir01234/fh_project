@@ -60,3 +60,9 @@ type UserTeam struct {
 	TeamID string `json:"team_id,omitempty" db:"team_id"`
 	UserID string `json:"user_id,omitempty" db:"user_id"`
 }
+
+type TeamProject struct {
+	ID        string `json:"team_projects_id,omitempty" db:"team_projects_id"`
+	TeamID    string `json:"team_id,omitempty" db:"team_id"`
+	ProjectID string `json:"project_id,omitempty" db:"project_id"`
+}

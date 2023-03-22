@@ -40,6 +40,17 @@ var AssignTaskToProjectAPI = http.HandlerFunc(func(rw http.ResponseWriter, r *ht
 		model.ServerErrResponse("project doesn't exist", rw)
 		return
 	}
+	existedProjectID, err := conn.GetAssignTaskToProjectDB(body.ProjectID, body.TaskID)
+	if err != nil && err != sql.ErrNoRows {
+		log.Printf("database error: %v\n", err.Error())
+		model.ServerErrResponse(err.Error(), rw)
+		return
+	}
+	if existedProjectID == body.ProjectID {
+		log.Printf("error: %v\n", "task already assign to this project")
+		model.ErrorResponse("task already assign to this project", rw)
+		return
+	}
 	resp, err := conn.AddProjectTaskDB(body)
 	if err != nil {
 		log.Printf("database error: %v\n", err.Error())
